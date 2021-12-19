@@ -1,0 +1,48 @@
+diff --git a/node_modules/react-native-action-button/ActionButton.js b/node_modules/react-native-action-button/ActionButton.js
+index b8306c2..1dc3c41 100644
+--- a/node_modules/react-native-action-button/ActionButton.js
++++ b/node_modules/react-native-action-button/ActionButton.js
+@@ -43,7 +43,7 @@ export default class ActionButton extends Component {
+     if (nextProps.resetToken !== this.state.resetToken) {
+       if (nextProps.active === false && this.state.active === true) {
+         if (this.props.onReset) this.props.onReset();
+-        Animated.spring(this.anim, { toValue: 0 }).start();
++        Animated.spring(this.anim, { toValue: 0, useNativeDriver: false }).start();
+         setTimeout(
+           () =>
+             this.setState({ active: false, resetToken: nextProps.resetToken }),
+@@ -53,7 +53,7 @@ export default class ActionButton extends Component {
+       }
+ 
+       if (nextProps.active === true && this.state.active === false) {
+-        Animated.spring(this.anim, { toValue: 1 }).start();
++        Animated.spring(this.anim, { toValue: 1, useNativeDriver: false }).start();
+         this.setState({ active: true, resetToken: nextProps.resetToken });
+         return;
+       }
+@@ -93,6 +93,7 @@ export default class ActionButton extends Component {
+     ];
+   }
+   
++
+   //////////////////////
+   // RENDER METHODS
+   //////////////////////
+@@ -316,7 +317,7 @@ export default class ActionButton extends Component {
+     if (this.state.active) return this.reset();
+ 
+     if (animate) {
+-      Animated.spring(this.anim, { toValue: 1 }).start();
++      Animated.spring(this.anim, { toValue: 1, useNativeDriver: false }).start();
+     } else {
+       this.anim.setValue(1);
+     }
+@@ -328,7 +329,7 @@ export default class ActionButton extends Component {
+     if (this.props.onReset) this.props.onReset();
+ 
+     if (animate) {
+-      Animated.spring(this.anim, { toValue: 0 }).start();
++      Animated.spring(this.anim, { toValue: 0, useNativeDriver: false }).start();
+     } else {
+       this.anim.setValue(0);
+     }
