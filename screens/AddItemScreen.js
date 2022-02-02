@@ -12,6 +12,7 @@ import DatePicker from 'react-native-date-picker';
 import moment from 'moment';
 import uuid from 'react-native-uuid';
 import realm from '../Realm/realm';
+import {resetSelectedItemsHandler} from '../helper/helper';
 
 const {width, height} = Dimensions.get('window');
 
@@ -21,6 +22,26 @@ const AddItemScreen = ({navigation}) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('Pending');
+
+  const createItemHandler = () => {
+    realm.write(() => {
+      realm.create('TodoItem', {
+        _id: uuid.v4(),
+        title: title,
+        description: description,
+        deadline: moment(date).format('DD MMM YYYY'),
+        status: status,
+        isSelected: false,
+      });
+    });
+    resetSelectedItemsHandler();
+    navigation.goBack();
+  };
+
+  const goBackHandler = () => {
+    resetSelectedItemsHandler();
+    navigation.goBack();
+  };
 
   return (
     <View>
@@ -155,30 +176,13 @@ const AddItemScreen = ({navigation}) => {
           {/* Confirm Button */}
           <TouchableOpacity
             style={[styles.buttonContainer, styles.confirmContainer]}
-            onPress={() => {
-              realm.write(() => {
-                realm.create('TodoItem', {
-                  _id: uuid.v4(),
-                  title: title,
-                  description: description,
-                  deadline: moment(date).format('DD MMM YYYY'),
-                  status: status,
-                  isSelected: false,
-                });
-              });
-              navigation.goBack();
-            }}>
+            onPress={createItemHandler}>
             <Text style={styles.buttonLabel}>Confirm</Text>
-          </TouchableOpacity>
-          {/* Delete Button */}
-          <TouchableOpacity
-            style={[styles.buttonContainer, styles.deleteContainer]}>
-            <Text style={styles.buttonLabel}>Delete</Text>
           </TouchableOpacity>
           {/* Cancel Button */}
           <TouchableOpacity
             style={[styles.buttonContainer, styles.cancelContainer]}
-            onPress={() => navigation.goBack()}>
+            onPress={goBackHandler}>
             <Text style={styles.buttonLabel}>Cancel</Text>
           </TouchableOpacity>
         </View>

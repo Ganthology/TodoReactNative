@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import DatePicker from 'react-native-date-picker';
 import moment from 'moment';
 import realm from '../Realm/realm';
+import {resetSelectedItemsHandler} from '../helper/helper';
 
 const {width, height} = Dimensions.get('window');
 
@@ -39,6 +40,11 @@ const EditItemScreen = ({navigation, route}) => {
     realm.write(() => {
       realm.delete(selectedItem);
     });
+    navigation.goBack();
+  };
+
+  const goBackHandler = () => {
+    resetSelectedItemsHandler();
     navigation.goBack();
   };
 
@@ -187,7 +193,7 @@ const EditItemScreen = ({navigation, route}) => {
           {/* Cancel Button */}
           <TouchableOpacity
             style={[styles.buttonContainer, styles.cancelContainer]}
-            onPress={() => navigation.goBack()}>
+            onPress={goBackHandler}>
             <Text style={styles.buttonLabel}>Cancel</Text>
           </TouchableOpacity>
         </View>
