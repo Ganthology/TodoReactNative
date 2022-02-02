@@ -85,6 +85,16 @@ const TodolistTabScreen = ({navigation}) => {
   };
 
   const completeItemHandler = () => {
+    if (routes[index].title === 'Completed') {
+      Toast.show({
+        type: 'info',
+        text1: 'No items available for the action',
+        text2: 'All items are completed',
+        position: 'top',
+      });
+      return;
+    }
+
     const todolistData = realm.objects('TodoItem');
 
     const selectedItems = todolistData.filtered('isSelected == true');
