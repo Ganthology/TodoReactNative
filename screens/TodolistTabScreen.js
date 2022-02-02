@@ -96,6 +96,13 @@ const TodolistTabScreen = ({navigation}) => {
         realm.delete(item);
       });
     }
+
+    Toast.show({
+      type: 'success',
+      text1: 'Action completed',
+      text2: 'Items deleted successfully',
+      position: 'top',
+    });
   };
 
   const completeItemHandler = () => {
@@ -126,8 +133,16 @@ const TodolistTabScreen = ({navigation}) => {
     for (let item of selectedItems) {
       realm.write(() => {
         item.status = 'Completed';
+        item.isSelected = false;
       });
     }
+
+    Toast.show({
+      type: 'success',
+      text1: 'Action completed',
+      text2: "Item status changed to 'Completed' successfully",
+      position: 'top',
+    });
   };
 
   const resetSelectedItems = () => {
