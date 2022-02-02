@@ -182,7 +182,7 @@ const TodolistTabScreen = ({navigation}) => {
       />
       <ActionButton buttonColor="black">
         <ActionButton.Item
-          buttonColor="darkgrey"
+          buttonColor="#0096c7"
           title="New"
           onPress={() => {
             navigation.navigate('Add Item');
@@ -190,19 +190,19 @@ const TodolistTabScreen = ({navigation}) => {
           <Icon name="add-outline" style={styles.actionButtonIcon} />
         </ActionButton.Item>
         <ActionButton.Item
-          buttonColor="#9b59b6"
+          buttonColor="#0077b6"
           title="Edit"
           onPress={editItemHandler}>
           <Icon name="create-outline" style={styles.actionButtonIcon} />
         </ActionButton.Item>
         <ActionButton.Item
-          buttonColor="#3498db"
+          buttonColor="#023e8a"
           title="Delete"
           onPress={deleteItemHandler}>
           <Icon name="trash-outline" style={styles.actionButtonIcon} />
         </ActionButton.Item>
         <ActionButton.Item
-          buttonColor="#1abc9c"
+          buttonColor="#03045e"
           title="Complete"
           onPress={completeItemHandler}>
           <Icon name="checkmark-done-outline" style={styles.actionButtonIcon} />
