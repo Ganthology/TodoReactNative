@@ -1,19 +1,15 @@
 import React, {useState} from 'react';
 import {
-  SafeAreaView,
   TextInput,
   Text,
   TouchableOpacity,
   StyleSheet,
   View,
   Dimensions,
-  ScrollView,
-  Button,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DatePicker from 'react-native-date-picker';
 import moment from 'moment';
-import Realm from 'realm';
 import uuid from 'react-native-uuid';
 import realm from '../Realm/realm';
 
@@ -25,8 +21,6 @@ const AddItemScreen = ({navigation}) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('Pending');
-
-  let task1;
 
   return (
     <View>
@@ -163,7 +157,7 @@ const AddItemScreen = ({navigation}) => {
             style={[styles.buttonContainer, styles.confirmContainer]}
             onPress={() => {
               realm.write(() => {
-                task1 = realm.create('TodoItem', {
+                realm.create('TodoItem', {
                   _id: uuid.v4(),
                   title: title,
                   description: description,
