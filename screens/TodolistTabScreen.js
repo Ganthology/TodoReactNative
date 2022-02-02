@@ -9,6 +9,7 @@ import {
 import TodolistScreen from './TodolistScreen';
 import {TabView, TabBar, SceneMap} from 'react-native-tab-view';
 import ActionButton from 'react-native-action-button';
+import Toast from 'react-native-toast-message';
 import Icon from 'react-native-vector-icons/Ionicons';
 import realm from '../Realm/realm';
 
@@ -40,6 +41,36 @@ const TodolistTabScreen = ({navigation}) => {
     third: ThirdRoute,
   });
 
+  const editItemHandler = () => {
+    // const todolistData = realm.objects('TodoItem');
+
+    // const selectedItems = todolistData.filtered('isSelected == true');
+
+    // if (selectedItems.length > 1) {
+    //   Toast.show({
+    //     type: 'error',
+    //     text1: 'Make sure to only select 1 item!',
+    //     position: 'top',
+    //   });
+
+    //   return;
+    // } else if (selectedItems.isEmpty) {
+    //   Toast.show({
+    //     type: 'error',
+    //     text1: 'Warning',
+    //     text2: 'You have to select an item!',
+    //     position: 'top',
+    //   });
+    // } else {
+    //   Toast.show({
+    //     type: 'success',
+    //     text1: 'Item selected!',
+    //     text2: 'SUCCESS',
+    //     position: 'top',
+    //   });
+    // }
+  };
+
   const deleteItemHandler = () => {
     const todolistData = realm.objects('TodoItem');
 
@@ -69,11 +100,11 @@ const TodolistTabScreen = ({navigation}) => {
 
     const selectedItems = todolistData.filtered('isSelected == true');
 
-    selectedItems.forEach(selectedItem => {
+    for (let item of selectedItems) {
       realm.write(() => {
-        selectedItem.isSelected = false;
+        item.isSelected = false;
       });
-    });
+    }
   };
 
   useEffect(() => {
@@ -125,7 +156,7 @@ const TodolistTabScreen = ({navigation}) => {
         <ActionButton.Item
           buttonColor="#9b59b6"
           title="Edit"
-          onPress={() => console.log('notes tapped!')}>
+          onPress={editItemHandler}>
           <Icon name="create-outline" style={styles.actionButtonIcon} />
         </ActionButton.Item>
         <ActionButton.Item
