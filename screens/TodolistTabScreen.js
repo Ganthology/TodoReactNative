@@ -1,5 +1,11 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, useWindowDimensions, View} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  Dimensions,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import TodolistScreen from './TodolistScreen';
 import {TabView, TabBar, SceneMap} from 'react-native-tab-view';
 import ActionButton from 'react-native-action-button';
@@ -52,6 +58,22 @@ const TodolistTabScreen = ({navigation}) => {
     });
   };
 
+  const resetSelectedItems = () => {
+    const todolistData = realm.objects('TodoItem');
+
+    const selectedItems = todolistData.filtered('isSelected == true');
+
+    selectedItems.forEach(selectedItem => {
+      realm.write(() => {
+        selectedItem.isSelected = false;
+      });
+    });
+  };
+
+  useEffect(() => {
+    resetSelectedItems();
+  }, [index]);
+
   const renderTabBar = props => (
     <TabBar
       {...props}
@@ -64,13 +86,8 @@ const TodolistTabScreen = ({navigation}) => {
       renderLabel={({route, focused, color}) => (
         <Text
           style={[
-            focused ? styles.TabBarHeaderFocused : styles.TabBarHeader,
-            {
-              paddingLeft: '5%',
-              paddingBottom: '10%',
-              margin: '5%',
-              width: layout.width / 3,
-            },
+            focused ? styles.TabBarHeaderFocused : styles.TabBarHeaderNormal,
+            styles.TabBarHeader,
           ]}>
           {route.title}
         </Text>
@@ -133,15 +150,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingTop: '15%',
     paddingLeft: '5%',
+    textAlign: 'left',
   },
-  TabBarHeader: {
+  TabBarHeaderNormal: {
     color: 'grey',
-    fontSize: 14,
+    fontSize: 18,
   },
   TabBarHeaderFocused: {
     color: 'black',
     fontWeight: 'bold',
     fontSize: 18,
+  },
+  TabBarHeader: {
+    paddingBottom: '5%',
+    width: Dimensions.get('window').width / 3,
+    textAlign: 'center',
   },
   actionButtonIcon: {
     fontSize: 22,
