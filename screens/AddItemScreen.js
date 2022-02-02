@@ -79,7 +79,11 @@ const AddItemScreen = ({navigation}) => {
               style={styles.textInputWithLogo}
               value={moment(date).format('DD MMM YYYY')}
             />
-            <Icon name="calendar" style={styles.closeButton} />
+            <Icon
+              name="calendar"
+              style={styles.closeButton}
+              onPress={() => setOpen(true)}
+            />
           </View>
 
           <DatePicker
