@@ -3,35 +3,19 @@ import {SafeAreaView, FlatList, StyleSheet} from 'react-native';
 import TodoItem from '../components/TodoItem';
 import realm from '../Realm/realm';
 
-const TodolistScreen = ({status}) => {
-  // const realm = await Realm.open({
-  //   path: "myrealm",
-  //   schema: [TodoItemSchema],
-  // });
-
+const TodolistScreen = ({status, extraData}) => {
   const todolistData = realm.objects('TodoItem');
-
-  // const filteredData = todolistData.filter(item => item.status === status);
 
   const filteredData = todolistData.filtered(`status == '${status}'`);
 
   const [itemList, setItemList] = useState(filteredData);
 
-  // useEffect(() => {
-  //   setItemList(filteredData);
-  // }, [filteredData]);
-
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#e9ecef',
-      }}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         keyExtractor={item => item.id}
         data={filteredData}
+        extraData={extraData}
         renderItem={({item}) => {
           return (
             <TodoItem
@@ -48,3 +32,12 @@ const TodolistScreen = ({status}) => {
 };
 
 export default TodolistScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e9ecef',
+  },
+});

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -36,7 +36,7 @@ const TodoItem = props => {
     <TouchableOpacity
       style={styles.container}
       onLongPress={selectedHandler}
-      onPress={() => console.log(item)}>
+      onPress={() => console.log(item, isSelected)}>
       <View style={styles.verticalContainer}>
         <Text style={styles.text}>{props.title}</Text>
         <Text style={styles.subtext}>Deadline: {props.deadline}</Text>

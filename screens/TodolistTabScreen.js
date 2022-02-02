@@ -12,18 +12,6 @@ import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import realm from '../Realm/realm';
 
-const FirstRoute = () => <TodolistScreen status={'Pending'} />;
-
-const SecondRoute = () => <TodolistScreen status={'Completed'} />;
-
-const ThirdRoute = () => <TodolistScreen status={'Overdue'} />;
-
-const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-  third: ThirdRoute,
-});
-
 const TodolistTabScreen = ({navigation}) => {
   const layout = useWindowDimensions();
 
@@ -33,6 +21,24 @@ const TodolistTabScreen = ({navigation}) => {
     {key: 'second', title: 'Completed'},
     {key: 'third', title: 'Overdue'},
   ]);
+
+  const FirstRoute = () => (
+    <TodolistScreen status={'Pending'} extraData={index} />
+  );
+
+  const SecondRoute = () => (
+    <TodolistScreen status={'Completed'} extraData={index} />
+  );
+
+  const ThirdRoute = () => (
+    <TodolistScreen status={'Overdue'} extraData={index} />
+  );
+
+  const renderScene = SceneMap({
+    first: FirstRoute,
+    second: SecondRoute,
+    third: ThirdRoute,
+  });
 
   const deleteItemHandler = () => {
     const todolistData = realm.objects('TodoItem');

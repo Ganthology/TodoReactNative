@@ -19,11 +19,6 @@ import realm from '../Realm/realm';
 
 const {width, height} = Dimensions.get('window');
 
-// const realm = await Realm.open({
-// 	path: "myrealm",
-// 	schema: [TodoItemSchema],
-// });
-
 const AddItemScreen = ({navigation}) => {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
