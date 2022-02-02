@@ -30,7 +30,6 @@ const TodolistScreen = ({status, extraData}) => {
               id={item._id}
               title={item.title}
               deadline={item.deadline}
-              isSelected={item.isSelected}
             />
           );
         }}
