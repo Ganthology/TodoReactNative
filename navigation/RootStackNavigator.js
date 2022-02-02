@@ -2,6 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TodolistTabScreen from '../screens/TodolistTabScreen';
 import AddItemScreen from '../screens/AddItemScreen';
+import EditItemScreen from '../screens/EditItemScreen';
 
 const RootStack = createNativeStackNavigator();
 
@@ -19,6 +20,11 @@ const RootStackNavigator = () => {
         <RootStack.Screen
           name="Add Item"
           component={AddItemScreen}
+          options={{headerShown: false}}
+        />
+        <RootStack.Screen
+          name="Edit Item"
+          component={EditItemScreen}
           options={{headerShown: false}}
         />
       </RootStack.Group>

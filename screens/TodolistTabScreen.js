@@ -12,6 +12,7 @@ import ActionButton from 'react-native-action-button';
 import Toast from 'react-native-toast-message';
 import Icon from 'react-native-vector-icons/Ionicons';
 import realm from '../Realm/realm';
+import {resetSelectedItemsHandler} from '../helper/helper';
 
 const TodolistTabScreen = ({navigation}) => {
   const layout = useWindowDimensions();
@@ -65,11 +66,8 @@ const TodolistTabScreen = ({navigation}) => {
 
       return;
     } else if (selectedItems.length === 1) {
-      Toast.show({
-        type: 'success',
-        text1: 'Item selected!',
-        text2: 'SUCCESS',
-        position: 'top',
+      navigation.navigate('Edit Item', {
+        selectedItem: selectedItems[0],
       });
 
       return;
@@ -145,20 +143,8 @@ const TodolistTabScreen = ({navigation}) => {
     });
   };
 
-  const resetSelectedItems = () => {
-    const todolistData = realm.objects('TodoItem');
-
-    const selectedItems = todolistData.filtered('isSelected == true');
-
-    for (let item of selectedItems) {
-      realm.write(() => {
-        item.isSelected = false;
-      });
-    }
-  };
-
   useEffect(() => {
-    resetSelectedItems();
+    resetSelectedItemsHandler();
   }, [index]);
 
   const renderTabBar = props => (
