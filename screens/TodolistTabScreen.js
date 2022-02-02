@@ -76,11 +76,11 @@ const TodolistTabScreen = ({navigation}) => {
 
     const selectedItems = todolistData.filtered('isSelected == true');
 
-    selectedItems.forEach(selectedItem => {
+    for (let item of selectedItems) {
       realm.write(() => {
-        realm.delete(selectedItem);
+        realm.delete(item);
       });
-    });
+    }
   };
 
   const completeItemHandler = () => {
@@ -88,11 +88,11 @@ const TodolistTabScreen = ({navigation}) => {
 
     const selectedItems = todolistData.filtered('isSelected == true');
 
-    selectedItems.forEach(selectedItem => {
+    for (let item of selectedItems) {
       realm.write(() => {
-        selectedItem.status = 'Completed';
+        item.status = 'Completed';
       });
-    });
+    }
   };
 
   const resetSelectedItems = () => {
