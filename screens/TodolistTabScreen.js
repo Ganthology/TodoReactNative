@@ -55,20 +55,24 @@ const TodolistTabScreen = ({navigation}) => {
       });
 
       return;
-    } else if (selectedItems.isEmpty) {
+    } else if (selectedItems.length === 0) {
       Toast.show({
         type: 'error',
         text1: 'No items available for the action',
         text2: 'Please select at least an item!',
         position: 'top',
       });
-    } else {
+
+      return;
+    } else if (selectedItems.length === 1) {
       Toast.show({
         type: 'success',
         text1: 'Item selected!',
         text2: 'SUCCESS',
         position: 'top',
       });
+
+      return;
     }
   };
 
@@ -77,7 +81,7 @@ const TodolistTabScreen = ({navigation}) => {
 
     const selectedItems = todolistData.filtered('isSelected == true');
 
-    if (selectedItems.isEmpty) {
+    if (selectedItems.length === 0) {
       Toast.show({
         type: 'error',
         text1: 'No items available for the action',
@@ -109,7 +113,7 @@ const TodolistTabScreen = ({navigation}) => {
 
     const selectedItems = todolistData.filtered('isSelected == true');
 
-    if (selectedItems.isEmpty) {
+    if (selectedItems.length === 0) {
       Toast.show({
         type: 'error',
         text1: 'No items available for the action',
