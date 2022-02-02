@@ -42,33 +42,34 @@ const TodolistTabScreen = ({navigation}) => {
   });
 
   const editItemHandler = () => {
-    // const todolistData = realm.objects('TodoItem');
+    const todolistData = realm.objects('TodoItem');
 
-    // const selectedItems = todolistData.filtered('isSelected == true');
+    const selectedItems = todolistData.filtered('isSelected == true');
 
-    // if (selectedItems.length > 1) {
-    //   Toast.show({
-    //     type: 'error',
-    //     text1: 'Make sure to only select 1 item!',
-    //     position: 'top',
-    //   });
+    if (selectedItems.length > 1) {
+      Toast.show({
+        type: 'error',
+        text1: 'Reselect your items',
+        text2: 'Make sure to only select 1 item!',
+        position: 'top',
+      });
 
-    //   return;
-    // } else if (selectedItems.isEmpty) {
-    //   Toast.show({
-    //     type: 'error',
-    //     text1: 'Warning',
-    //     text2: 'You have to select an item!',
-    //     position: 'top',
-    //   });
-    // } else {
-    //   Toast.show({
-    //     type: 'success',
-    //     text1: 'Item selected!',
-    //     text2: 'SUCCESS',
-    //     position: 'top',
-    //   });
-    // }
+      return;
+    } else if (selectedItems.isEmpty) {
+      Toast.show({
+        type: 'error',
+        text1: 'Select an item',
+        text2: 'You have to select an item!',
+        position: 'top',
+      });
+    } else {
+      Toast.show({
+        type: 'success',
+        text1: 'Item selected!',
+        text2: 'SUCCESS',
+        position: 'top',
+      });
+    }
   };
 
   const deleteItemHandler = () => {
