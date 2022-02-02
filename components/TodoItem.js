@@ -13,11 +13,15 @@ import realm from '../Realm/realm';
 const TodoItem = props => {
   // props: title, deadline
   // data: [{title: , deadline: }, {}]
-  const [isSelected, setIsSelected] = useState(props.isSelected);
-
   const todolistData = realm.objects('TodoItem');
 
   const item = todolistData.filtered(`_id == '${props.id}'`);
+
+  const [isSelected, setIsSelected] = useState(item.isSelected);
+
+  useEffect(() => {
+    setIsSelected(item[0].isSelected);
+  }, [item[0].isSelected]);
 
   const selectedHandler = () => {
     setIsSelected(prevState => {
