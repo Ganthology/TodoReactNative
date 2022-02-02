@@ -2,13 +2,21 @@ import React, {useState, useEffect} from 'react';
 import {SafeAreaView, FlatList, StyleSheet} from 'react-native';
 import TodoItem from '../components/TodoItem';
 import realm from '../Realm/realm';
+import {useFocusEffect} from '@react-navigation/native';
 
 const TodolistScreen = ({status, extraData}) => {
   const todolistData = realm.objects('TodoItem');
 
   const filteredData = todolistData.filtered(`status == '${status}'`);
 
-  const [itemList, setItemList] = useState(filteredData);
+  const [dummyState, setDummyState] = useState(true);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setDummyState(prev => !prev);
+      return;
+    }, []),
+  );
 
   return (
     <SafeAreaView style={styles.container}>
