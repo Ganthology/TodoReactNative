@@ -12,6 +12,13 @@ Features of this app:
 - Data stored locally in the user's device
 - Clean UI
 
+Screenshots of the app:
+- 
+
+1 | 2 | 3 | 4 | 5 |
+--- | --- | --- | --- |--- |
+![Todo](https://raw.githubusercontent.com/Ganthology/TodoReactNative/main/screenshots/todo.png) | ![Action Button](https://raw.githubusercontent.com/Ganthology/TodoReactNative/main/screenshots/additem.png) | ![add item page](https://raw.githubusercontent.com/Ganthology/TodoReactNative/main/screenshots/actionbutton.png) | ![Toast Message](https://raw.githubusercontent.com/Ganthology/TodoReactNative/main/screenshots/toast.png) | ![Edit Item](https://raw.githubusercontent.com/Ganthology/TodoReactNative/main/screenshots/datepicker.png) |
+
 Listed are the skills and things I learned/used for this project:
 - 
 - Organise React Native project in a cleaner way (Separating files to different folders for corresponding purposes)
@@ -37,6 +44,7 @@ Listed are the skills and things I learned/used for this project:
 
 Things that can be improved/added in the future:
 - 
+- Add a ```Splash screen``` for the app
 - Push Notification to remind user about the deadlines
 - Automatically shift items with deadline < current ```new Date()``` to overdue
 - Separate ```Logic layer``` and ```Presentation layer``` for the screens and components
