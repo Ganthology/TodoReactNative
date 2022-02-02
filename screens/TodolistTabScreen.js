@@ -58,8 +58,8 @@ const TodolistTabScreen = ({navigation}) => {
     } else if (selectedItems.isEmpty) {
       Toast.show({
         type: 'error',
-        text1: 'Select an item',
-        text2: 'You have to select an item!',
+        text1: 'No items available for the action',
+        text2: 'Please select at least an item!',
         position: 'top',
       });
     } else {
@@ -76,6 +76,16 @@ const TodolistTabScreen = ({navigation}) => {
     const todolistData = realm.objects('TodoItem');
 
     const selectedItems = todolistData.filtered('isSelected == true');
+
+    if (selectedItems.isEmpty) {
+      Toast.show({
+        type: 'error',
+        text1: 'No items available for the action',
+        text2: 'Please select at least an item!',
+        position: 'top',
+      });
+      return;
+    }
 
     for (let item of selectedItems) {
       realm.write(() => {
@@ -98,6 +108,16 @@ const TodolistTabScreen = ({navigation}) => {
     const todolistData = realm.objects('TodoItem');
 
     const selectedItems = todolistData.filtered('isSelected == true');
+
+    if (selectedItems.isEmpty) {
+      Toast.show({
+        type: 'error',
+        text1: 'No items available for the action',
+        text2: 'Please select at least an item!',
+        position: 'top',
+      });
+      return;
+    }
 
     for (let item of selectedItems) {
       realm.write(() => {
