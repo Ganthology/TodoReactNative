@@ -41,10 +41,11 @@ Listed are the skills and things I learned/used for this project:
 - Using ```moment.js``` to manipulate date formats
 - Using ```react-native-action-button``` to create ```action buttons``` for Add Item, Edit Item, Delete Item and Complete Item
 - Create RN patches as the library ```react-native-action-button``` is no longer maintained and there's an open PR for existing issue
+- Add ```splash screen image``` to RN app using ```react-native-splash-screen``` library
 
 Things that can be improved/added in the future:
 - 
-- Add a ```Splash screen``` for the app
+- ~~Add a ```Splash screen``` for the app~~
 - Push Notification to remind user about the deadlines
 - Automatically shift items with deadline < current ```new Date()``` to overdue
 - Separate ```Logic layer``` and ```Presentation layer``` for the screens and components
@@ -73,3 +74,4 @@ References:
 - https://github.com/mastermoo/react-native-action-button
 - https://github.com/calintamas/react-native-toast-message
 - https://github.com/satya164/react-native-tab-view
+- https://blog.logrocket.com/building-a-splash-screen-in-react-native/#howtobuildasplashscreeninreactnative
